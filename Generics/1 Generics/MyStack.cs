@@ -4,94 +4,47 @@ using System.Text;
 
 namespace _1_Generics
 {
-    public class MyStack<T>
+    class MyStack<T> : IMyCollection<T>
     {
-        private T[] elementsOfStack;
-        private int topOfTheStack;
-        
-        public MyStack():this(5)
+        private Stack<T> stack;
+        private int _capacity;
+
+        public MyStack(int capacity = 5)
         {
+            _capacity = capacity;
+            stack = new Stack<T>(capacity);
         }
 
-        public MyStack(int capacity)
-        {
-            elementsOfStack = new T[capacity];
-            topOfTheStack = -1;
-        }
+        public bool IsEmpty => stack.Count == 0;
 
-        public int Capacity 
-        {
-            get { return elementsOfStack.Length; } 
-        }
-
-        public bool IsEmpty
-        {
-            get { return topOfTheStack == -1; }
-        }
-        public bool IsFull 
-        {
-            get { return topOfTheStack == (Capacity - 1); }
-        }
+        public bool IsFull => stack.Count == _capacity;
 
         public void WriteElement(T element)
         {
-            if (IsFull)
-            {
-                Console.WriteLine("Stack is full!");
-                Console.WriteLine("Element not added");
-            }
-            else
-            {
-                elementsOfStack[++topOfTheStack] = element;
-                Console.WriteLine("Element has been successfully added !");
-            }
+            stack.Push(element);
         }
-
-        public T ReadElement() 
+        public T ReadElement()
         {
-            if (IsEmpty)
-            {
-                Console.WriteLine("Stack is empty!");
-                return default;
-            }
-            else
-                return elementsOfStack[topOfTheStack--];
-     
+            return stack.Pop();
         }
-
-        public T CheckElement() 
+        public T CheckElement()
         {
-            if (IsEmpty)
-            {
-                Console.WriteLine("Stack is empty!");
-                return default;
-            }
-            else return elementsOfStack[topOfTheStack];
+            return stack.Peek();
         }
 
         public void DisplayAll()
         {
-            if (IsEmpty)            
-                Console.WriteLine("No elements to display");
-
-            for (int i = topOfTheStack; i > -1; i--)
-                Console.WriteLine($"Element {i+1} : {elementsOfStack[i]}");
+            if (IsEmpty)
+                System.Console.WriteLine("Queue is empty - no elements to display");
+            var i = 1;
+            foreach (var item in stack)
+            {
+                System.Console.WriteLine($"Element {i++} : {item}");
+            }
         }
 
-        //public double SumOfElements()
-        //{
-        //    var sum = 0.0;
+        
 
-        //    for (int i = topOfTheStack; i > -1; i--)
-        //    {
-        //        if (elementsOfStack[i] is double)
-        //        {
-        //            sum += (double)elementsOfStack[i];
-        //        }
-                
-        //    }
-
-        //    return sum;
-        //}
+        
     }
 }

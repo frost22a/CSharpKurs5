@@ -12,7 +12,7 @@ namespace _1_Generics.Tests
         [TestMethod()]
         public void NewStack_IsEmpyty()
         {
-            var stack = new MyStack<double>();
+            var stack = new MyStack_old<double>();
 
             Assert.IsTrue(stack.IsEmpty);
         }
@@ -20,7 +20,7 @@ namespace _1_Generics.Tests
         [TestMethod()]
         public void FourElementsStackAddedFourElements_IsFull()
         {
-            var stack = new MyStack<double>(4);
+            var stack = new MyStack_old<double>(4);
             stack.WriteElement(12);
             stack.WriteElement(15);
             stack.WriteElement(10);
@@ -33,7 +33,7 @@ namespace _1_Generics.Tests
         public void Last_In_First_Out()
         {
             // Arrange
-            var stack = new MyStack<string>(4);
+            var stack = new MyStack_old<string>(4);
             var value1 = "3.3";
             var value2 = "6.5";
             var value3 = "9.4";
@@ -59,7 +59,7 @@ namespace _1_Generics.Tests
         public void The_Output_Elemnet_Is_The_Top_Of_The_Stack()
         {
             //Arrange
-            var stack = new MyStack<double>(10);
+            var stack = new MyStack_old<double>(10);
 
             //Act
             stack.WriteElement(1);

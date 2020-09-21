@@ -6,13 +6,13 @@ namespace _1_Generics
     {
         static void Main(string[] args)
         {
-            var stack = new MyStack<double>();
+            var collection = new MyStack<double>();
 
             while (true)
             {
                 int choise = DisplayMenu();
 
-                WorkWithChoice(stack, choise);
+                WorkWithChoice(collection, choise);
                 BackToMenu();
             }
         }
@@ -28,14 +28,14 @@ namespace _1_Generics
             Console.WriteLine("2. Read element");
             Console.WriteLine("3. Check element");
             Console.WriteLine("4. Display all");
-            Console.WriteLine("6. End of program");
+            Console.WriteLine("5. End of program");
             Console.WriteLine();
             Console.WriteLine("Choose an option:");
             int.TryParse(Console.ReadLine(), out int choise);
             return choise;
         }
 
-        private static void WorkWithChoice(MyStack<double> stack, int choise)
+        private static void WorkWithChoice(IMyCollection<double> stack, int choise)
         {
             switch (choise)
             {
