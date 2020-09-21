@@ -6,7 +6,7 @@ namespace _1_Generics
     {
         static void Main(string[] args)
         {
-            var collection = new MyStack<double>();
+            var collection = new MyOverWriteQueue<double>();
 
             while (true)
             {
