@@ -4,9 +4,9 @@ using System.Text;
 
 namespace _1_Generics
 {
-    public class MyStack
+    public class MyStack<T>
     {
-        private double[] elementsOfStack;
+        private T[] elementsOfStack;
         private int topOfTheStack;
         
         public MyStack():this(5)
@@ -15,7 +15,7 @@ namespace _1_Generics
 
         public MyStack(int capacity)
         {
-            elementsOfStack = new double[capacity];
+            elementsOfStack = new T[capacity];
             topOfTheStack = -1;
         }
 
@@ -33,7 +33,7 @@ namespace _1_Generics
             get { return topOfTheStack == (Capacity - 1); }
         }
 
-        public void WriteElement(double element)
+        public void WriteElement(T element)
         {
             if (IsFull)
             {
@@ -47,24 +47,24 @@ namespace _1_Generics
             }
         }
 
-        public double ReadElement() 
+        public T ReadElement() 
         {
             if (IsEmpty)
             {
                 Console.WriteLine("Stack is empty!");
-                return 0;
+                return default;
             }
             else
                 return elementsOfStack[topOfTheStack--];
      
         }
 
-        public double CheckElement() 
+        public T CheckElement() 
         {
             if (IsEmpty)
             {
                 Console.WriteLine("Stack is empty!");
-                return 0;
+                return default;
             }
             else return elementsOfStack[topOfTheStack];
         }
@@ -77,5 +77,21 @@ namespace _1_Generics
             for (int i = topOfTheStack; i > -1; i--)
                 Console.WriteLine($"Element {i+1} : {elementsOfStack[i]}");
         }
+
+        //public double SumOfElements()
+        //{
+        //    var sum = 0.0;
+
+        //    for (int i = topOfTheStack; i > -1; i--)
+        //    {
+        //        if (elementsOfStack[i] is double)
+        //        {
+        //            sum += (double)elementsOfStack[i];
+        //        }
+                
+        //    }
+
+        //    return sum;
+        //}
     }
 }
