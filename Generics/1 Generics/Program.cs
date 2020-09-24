@@ -28,32 +28,39 @@ namespace _1_Generics
             Console.WriteLine("2. Read element");
             Console.WriteLine("3. Check element");
             Console.WriteLine("4. Display all");
-            Console.WriteLine("5. End of program");
+            Console.WriteLine("5. Display foreach");
+            Console.WriteLine("6. End of program");
             Console.WriteLine();
             Console.WriteLine("Choose an option:");
             int.TryParse(Console.ReadLine(), out int choise);
             return choise;
         }
 
-        private static void WorkWithChoice(IMyCollection<double> stack, int choise)
+        private static void WorkWithChoice(IMyCollection<double> collection, int choise)
         {
             switch (choise)
             {
                 case 1:
                     Console.WriteLine("Write element: ");
                     if (double.TryParse(Console.ReadLine(), out double value))
-                        stack.WriteElement(value);
+                        collection.WriteElement(value);
                     break;
                 case 2:
-                    Console.WriteLine($"This element readed: {stack.ReadElement()}");
+                    Console.WriteLine($"This element readed: {collection.ReadElement()}");
                     break;
                 case 3:
-                    Console.WriteLine($"The output element is: {stack.CheckElement()}");
+                    Console.WriteLine($"The output element is: {collection.CheckElement()}");
                     break;
                 case 4:
-                    stack.DisplayAll();
+                    collection.DisplayAll();
                     break;
                 case 5:
+                    foreach (var item in collection)
+                    {
+                        Console.WriteLine(item);
+                    }
+                    break;
+                case 6:
                     Environment.Exit(1);
                     break;
 

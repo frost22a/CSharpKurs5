@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
 namespace _1_Generics
 {
-    class MyStack<T> : IMyCollection<T>
+    public class MyStack<T> : IMyCollection<T>
     {
         private Stack<T> stack;
         private int _capacity;
 
         public MyStack(int capacity = 5)
         {
-            _capacity = capacity;
-            stack = new Stack<T>(capacity);
+            this._capacity = capacity;
+            this.stack = new Stack<T>(capacity);
         }
 
         public bool IsEmpty => stack.Count == 0;
@@ -43,8 +44,20 @@ namespace _1_Generics
             }
         }
 
-        
+        public IEnumerator<T> GetEnumerator()
+        {
+            // najprostsza metoda - > dodać - > return queue.GetEnumerator();
+            // robimy własny:
+            foreach (var item in stack)
+            {
+                // możemy tu coś wpisać , a na końcu musimy:
+                yield return item;
+            }
+        }
 
-        
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }

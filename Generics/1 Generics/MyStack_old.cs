@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -103,5 +104,21 @@ namespace _1_Generics
 
         //    return sum;
         //}
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            // najprostsza metoda - > dodać - > return queue.GetEnumerator();
+            // robimy własny:
+            foreach (var item in elementsOfStack)
+            {
+                // możemy tu coś wpisać , a na końcu musimy:
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }

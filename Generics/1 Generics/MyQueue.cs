@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace _1_Generics
 {
@@ -38,8 +39,22 @@ namespace _1_Generics
             {
                 System.Console.WriteLine($"Element {i++} : {item}");
             }
-        }    
+        }
 
-        
+        public IEnumerator<T> GetEnumerator()
+        {
+            // najprostsza metoda - > dodać - > return queue.GetEnumerator();
+            // robimy własny:
+            foreach (var item in queue)
+            {
+                // możemy tu coś wpisać , a na końcu musimy:
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }
