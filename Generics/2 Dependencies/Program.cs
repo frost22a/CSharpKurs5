@@ -1,55 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 
 namespace _2_Dependencies
 {
+    public class BrandCollection : SortedDictionary<string, SortedSet<Car>>
+    {
+        public BrandCollection Add(string brandname, Car car) 
+        {
+            if (!ContainsKey(brandname))
+            {
+                Add(brandname, new SortedSet<Car>(new CarComparer()));
+            }
+            this[brandname].Add(car);
+            return this;
+        }
+    }
+    public class CarComparer : IEqualityComparer<Car>, IComparer<Car>
+    {
+        public int Compare(Car x, Car y)
+        {
+            return String.Compare(x.Name, y.Name);
+        }
+
+        public bool Equals(Car x, Car y)
+        {
+            return String.Equals(x.Name, y.Name);
+        }
+
+        public int GetHashCode(Car obj)
+        {
+            return obj.Name.GetHashCode();
+        }
+    }
     class Program
     {
-        public class CarComparer : IEqualityComparer<Car>, IComparer<Car>
-        {
-            public int Compare(Car x, Car y)
-            {
-                return String.Compare(x.Name, y.Name);
-            }
-
-            public bool Equals(Car x, Car y)
-            {
-                return String.Equals(x.Name, y.Name);
-            }
-
-            public int GetHashCode(Car obj)
-            {
-                return obj.Name.GetHashCode();
-            }
-        }
+            
         static void Main(string[] args)
         {
-            var cars = new SortedDictionary<string, SortedSet<Car>>();
+            var cars = new BrandCollection();
 
-            cars.Add("Opel", new SortedSet<Car>(new CarComparer())
-            {
-                new Car { Name = "Zafira"},
-                new Car { Name = "Moka"}, 
-                new Car { Name = "Meriva"}, 
-                new Car { Name = "Tigra"}, 
-                new Car { Name = "Corsa"}, 
-                new Car { Name = "Astra"},
-                new Car { Name = "Astra"},
-                new Car { Name = "Astra"}
-            });
+            cars.Add("Opel", new Car { Name = "Zafira" })
+                .Add("Opel", new Car { Name = "Moka" })
+                .Add("Opel", new Car { Name = "Meriva" })
+                .Add("Opel", new Car { Name = "Tigra" })
+                .Add("Opel", new Car { Name = "Corsa" })
+                .Add("Opel", new Car { Name = "Astra" })
+                .Add("Opel", new Car { Name = "Astra" })
+                .Add("Opel", new Car { Name = "Astra" });
+            
 
-            cars.Add("Ford", new SortedSet<Car>(new CarComparer()));
-            cars["Ford"].Add(new Car { Name = "Mondeo"});
-            cars["Ford"].Add(new Car { Name = "Puma" });
-            cars["Ford"].Add(new Car { Name = "Kuga" });
-            cars["Ford"].Add(new Car { Name = "Fiesta" });
-            cars["Ford"].Add(new Car { Name = "Ka" });
-            cars["Ford"].Add(new Car { Name = "Eskort" });
-            cars["Ford"].Add(new Car { Name = "Eskort" });
-            cars["Ford"].Add(new Car { Name = "Eskort" });
-            cars["Ford"].Add(new Car("Eskort"));
-            cars["Ford"].Add(Car.Add("Eskort"));
+            
+            cars.Add("Ford", new Car { Name = "Mondeo"})
+                .Add("Ford", new Car { Name = "Puma" })
+                .Add("Ford", new Car { Name = "Kuga" })
+                .Add("Ford", new Car { Name = "Fiesta" })
+                .Add("Ford", new Car { Name = "Ka" })
+                .Add("Ford", new Car { Name = "Eskort" })
+                .Add("Ford", new Car { Name = "Eskort" })
+                .Add("Ford", new Car { Name = "Eskort" });
+            
 
             foreach (var brand in cars)
             {
@@ -59,7 +68,7 @@ namespace _2_Dependencies
                 {
                     Console.WriteLine($"\tCar: {car.Name}");
                 }
-
+                
             }
             
 
