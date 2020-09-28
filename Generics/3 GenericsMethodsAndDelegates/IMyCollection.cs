@@ -11,6 +11,5 @@ namespace GenericsMethodsAndDelegates
         T CheckElement();
         void DisplayAll();
 
-        IEnumerable<TOutput> AsEnumerableOf<TOutput>();
     }
 }

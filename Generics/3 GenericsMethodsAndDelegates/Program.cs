@@ -55,7 +55,7 @@ namespace GenericsMethodsAndDelegates
                     collection.DisplayAll();
                     break;
                 case 5:
-                    var asInt = collection.AsEnumerableOf<int>();
+                    var asInt = collection.AsEnumerableOf<double, int>();
                     foreach (var item in asInt)
                     {
                         Console.WriteLine(item);
