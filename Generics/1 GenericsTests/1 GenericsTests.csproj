@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\1 Generics\1 Generics.csproj" />
+    <ProjectReference Include="..\1 Generics\1 GenericsTypes.csproj" />
   </ItemGroup>
 
 </Project>
